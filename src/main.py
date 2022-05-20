@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from color import *
+from tkinter import filedialog as fd
 
 class app():
 
@@ -13,6 +14,12 @@ class app():
         self.window.config(bg = tbox)
         self.window.title("mp3 tagger")
         self.window.resizable(False, False)
+
+        self.fn = ""
+
+
+
+
         #frames
         self.f1 = Frame(self.window,bg = bgs, width = 380, height = 210)
         self.f2 = Frame(self.window,bg = bgs, width = 380, height = 210)
@@ -41,7 +48,8 @@ class app():
 
     def single_file_edit(self,frame): #utils for single file edit
 
-
+        #self.fn = fd.askopenfilename()
+        
         #labels
 
         self.lfile_name = Label(frame, bg = bgs, fg = fonts,
@@ -71,7 +79,7 @@ class app():
                     bd = 0)
 
         self.edit = Button(self.f2, width = 12, height = 2, text = "Edit",
-                    fg = fonts, bg = bgs)
+                    fg = fonts, bg = bgs, command = lambda: print(self.fn))
 
 
 
