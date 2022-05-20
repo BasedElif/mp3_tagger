@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from color import *
 from tkinter import filedialog as fd
+from mod import modify
 
 class app():
 
@@ -19,6 +20,13 @@ class app():
 
 
 
+        #menus
+        self.menubar = Menu(self.window)
+        self.file_menu = Menu(self.menubar, tearoff = 0)
+        self.file_menu.add_command(label = "Open File",command = self.get_file)
+        self.menubar.add_cascade(label = "File", menu = self.file_menu)
+
+        self.window.config(menu = self.menubar)
 
         #frames
         self.f1 = Frame(self.window,bg = bgs, width = 380, height = 210)
@@ -49,7 +57,7 @@ class app():
     def single_file_edit(self,frame): #utils for single file edit
 
         #self.fn = fd.askopenfilename()
-        
+
         #labels
 
         self.lfile_name = Label(frame, bg = bgs, fg = fonts,
@@ -113,7 +121,9 @@ class app():
 
 
 
-
+    def get_file(self):
+        self.fn = fd.askopenfilename()
+        print(self.fn)
 
 
 root = Tk()
