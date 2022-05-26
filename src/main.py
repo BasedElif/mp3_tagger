@@ -16,7 +16,7 @@ class app():
         self.window.title("mp3 tagger")
         self.window.resizable(False, False)
 
-        self.fn = ""
+        self.fn = "" #file path
 
 
 
@@ -44,9 +44,6 @@ class app():
 
 
 
-
-
-
         self.f1.tkraise()
 
 
@@ -55,8 +52,6 @@ class app():
 
 
     def single_file_edit(self,frame): #utils for single file edit
-
-        #self.fn = fd.askopenfilename()
 
         #labels
 
@@ -78,7 +73,7 @@ class app():
         self.album = Entry(frame, bg = tbox, fg = fonts, bd = 1, width = 26)
 
         self.number = Spinbox(frame, bg = tbox, width = 4, increment = 1,
-                        from_ = 1, to = 999, bd = 1, fg = fonts)
+                        from_ = 1, to = 9999, bd = 1, fg = fonts)
 
         #buttons
 
@@ -87,7 +82,8 @@ class app():
                     bd = 0)
 
         self.edit = Button(self.f2, width = 12, height = 2, text = "Edit",
-                    fg = fonts, bg = bgs, command = lambda: print(self.fn))
+                    fg = fonts, bg = bgs, command = lambda:
+                    self.mod_file(self.fn,self.get_changes_sf()))
 
 
 
@@ -123,7 +119,25 @@ class app():
 
     def get_file(self):
         self.fn = fd.askopenfilename()
-        print(self.fn)
+
+
+    def get_changes_sf(self): #for single file
+
+        return [self.file_name.get(),
+                self.title.get(),
+                self.artist_name.get(),
+                self.album.get(),
+                self.number.get()]
+
+
+    def mod_file(self, path, changes):
+
+        try:    #test if there is a file loaded
+            modify(path, changes[0], changes[1],
+                changes[2], changes[3], changes[4])
+
+        except:
+            print("No file selected")
 
 
 root = Tk()
